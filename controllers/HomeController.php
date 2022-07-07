@@ -50,7 +50,7 @@ class HomeController extends ActionController
         //PATH TO THE PROVIDENCE
         // TODO : CHANGE FOR PRODUCTION
         // TODO : CHANGE WITH UR CONFIGURATION
-        $blocks = file_get_contents("/Users/deruellemarine/sites/comodo.inrap.test/public/app/plugins/expoInrap/homeData/blocks.json");
+        $blocks = file_get_contents($this->opo_config->get("providence_dir")."/app/plugins/expoInrap/homeData/blocks.json");
         $blocks = json_decode($blocks, true);
 
         return $blocks;
