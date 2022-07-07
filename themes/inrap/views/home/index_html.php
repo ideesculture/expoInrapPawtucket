@@ -474,9 +474,11 @@ $chrono = json_decode($chrono_json, true);
             <h1>Les lieux d'Expositions</h1>
         </div>
         <div class="col-md-4" id="carte">
+            <a href="/index.php/Inrap/Partenaires">
             <div class="homePageBlockDiv" style="background-image: url('/app/plugins/Expositions/carte_expo.png');justify-content: flex-start">
-                <p class="homePageBlockTitle">Bloc statisitque</p>
+                <p class="homePageBlockTitle">Lieu d'exposition</p>
             </div>
+            </a>
         </div>
         <div class="col-md-8" id="lieu_expo">
             <div class="row">
@@ -486,7 +488,7 @@ $chrono = json_decode($chrono_json, true);
                         muséale. Découvrez ces établissements et les objets de leur
                         collection, accédez à leur site internet ensuite pour préparer votre
                         visite.</p>
-                    <a href="">VOIR TOUS LES LIEUX D'EXPOSITION</a>
+                    <a href="/index.php/Inrap/Partenaires">VOIR TOUS LES LIEUX D'EXPOSITION</a>
 
                 </div>
 
@@ -511,16 +513,19 @@ $chrono = json_decode($chrono_json, true);
     <div class="row">
         <div class="col-md-4">
             <p style="border: 1px solid lightgray; padding: 15px;">
-            VOIR TOUTES LES EXPOSITIONS
+                <a href="/index.php/About/Expositions">VOIR TOUTES LES EXPOSITIONS</a>
             </p>
         </div>
         <div class="col-md-4" >
         <p style="border: 1px solid lightgray; padding: 15px;">
-            VOIR TOUTES LES EXPOSITIONS
+            <!-- NO LINK FOR ONLY YOUNG ?-->
+        VOIR TOUTES LES EXPOSITIONS
             JEUNESSE</p>
         </div>
         <div class="col-md-4">
             <p style="border: 1px solid lightgray; padding: 15px;">
+                        <!-- NO LINK YET-->
+
             Jeux archéo !
             </p>
         </div>
@@ -579,6 +584,14 @@ $(document).ready(function(){
     }
  
 
+    .HomePage a{
+        color: inherit;
+    }
+
+    .HomePage a:hover{
+        text-decoration: none;
+    }
+
     .container.HomePage div.row {
 
         margin-top: 20px;
@@ -624,6 +637,11 @@ function print_content($i)
         case 1:
         case 2:
         case 3:
+            if ($result["type"] == 1){
+                $url = "/index.php/Expositions/ShowJeunesse/Details/id/";
+            }else{
+                $url = "/index.php/Expositions/Show/Details/id/";
+            }
 
             $vt_page = new ca_site_pages($result["value_id"]);
 
@@ -636,7 +654,7 @@ function print_content($i)
                 $image = json_decode($content["blocs"], true)["blocks"][0]["data"]["url"];
             }
 
-            print '<div style="background-image: url(' . $image . '); " class="homePageBlockDiv"><p class="homePageBlockTitle">' . $title . '</p></div>';
+            print '<a href="'.$url.$result["value_id"].'"><div style="background-image: url(' . $image . '); " class="homePageBlockDiv"><p class="homePageBlockTitle">' . $title . '</p></div></a>';
 
             break;
         case 4:
